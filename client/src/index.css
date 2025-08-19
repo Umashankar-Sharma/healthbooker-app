@@ -1,0 +1,30 @@
+/* client/src/index.css */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+
+/* Define our color palette using CSS variables */
+:root {
+  --primary-color: #4f46e5; /* A nice indigo */
+  --primary-hover: #4338ca;
+  --background-color: #f9fafb; /* Light gray */
+  --text-color: #111827; /* Dark gray */
+  --card-bg-color: #ffffff;
+  --border-color: #e5e7eb;
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+/* A utility class to center content */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
