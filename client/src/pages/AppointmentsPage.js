@@ -17,18 +17,23 @@ const AppointmentsPage = () => {
   const [reason, setReason] = useState("");
   const [error, setError] = useState("");
 
+  // Effect to fetch initial data (appointments and doctors list)
   useEffect(() => {
     const fetchData = async () => {
       if (!token) return;
       try {
         const config = { headers: { "x-auth-token": token } };
+
+        // --- THIS IS THE FIX: Correct URL for fetching appointments ---
         const apptRes = await axios.get(
-          "https://healthbooker-app.onrender.com/api/auth/login",
+          `https://healthbooker-app.onrender.com/api/appointments`,
           config
         );
         setAppointments(apptRes.data);
+
+        // --- THIS IS THE FIX: Correct URL for fetching doctors ---
         const docRes = await axios.get(
-          "https://healthbooker-app.onrender.com/api/auth/login"
+          `https://healthbooker-app.onrender.com/api/doctors`
         );
         setDoctors(docRes.data);
       } catch (err) {
@@ -38,6 +43,7 @@ const AppointmentsPage = () => {
     fetchData();
   }, [token]);
 
+  // Effect to fetch available slots when a doctor or date changes
   useEffect(() => {
     const fetchSlots = async () => {
       if (selectedDoctor && selectedDate) {
@@ -55,6 +61,7 @@ const AppointmentsPage = () => {
     fetchSlots();
   }, [selectedDoctor, selectedDate]);
 
+  // Function to handle booking submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!selectedSlot) {
@@ -69,11 +76,11 @@ const AppointmentsPage = () => {
         reason,
       };
       await axios.post(
-        "https://healthbooker-app.onrender.com/api/appointments",
+        `https://healthbooker-app.onrender.com/api/appointments`,
         body,
         config
       );
-      window.location.reload();
+      window.location.reload(); // Refresh to show the new appointment
     } catch (err) {
       setError("Could not book appointment.");
     }
