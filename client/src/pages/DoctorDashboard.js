@@ -16,7 +16,7 @@ const DoctorDashboard = () => {
       try {
         const config = { headers: { "x-auth-token": token } };
         const res = await axios.get(
-          "http://localhost:5000/api/slots/me",
+          "https://healthbooker-app.onrender.com/api/slots/me",
           config
         );
         setSlots(res.data);
@@ -49,10 +49,17 @@ const DoctorDashboard = () => {
     try {
       const config = { headers: { "x-auth-token": token } };
       const body = { date, startTimes: times };
-      await axios.post("http://localhost:5000/api/slots", body, config);
+      await axios.post(
+        "https://healthbooker-app.onrender.com/api/slots",
+        body,
+        config
+      );
 
       // After creating new slots, we need to fetch the updated list again
-      const res = await axios.get("http://localhost:5000/api/slots/me", config);
+      const res = await axios.get(
+        "https://healthbooker-app.onrender.com/api/slots/me",
+        config
+      );
       setSlots(res.data);
 
       setTimes([]); // Clear selected times after submission

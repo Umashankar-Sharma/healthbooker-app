@@ -23,11 +23,13 @@ const AppointmentsPage = () => {
       try {
         const config = { headers: { "x-auth-token": token } };
         const apptRes = await axios.get(
-          "http://localhost:5000/api/appointments",
+          "https://healthbooker-app.onrender.com/api/auth/login",
           config
         );
         setAppointments(apptRes.data);
-        const docRes = await axios.get("http://localhost:5000/api/doctors");
+        const docRes = await axios.get(
+          "https://healthbooker-app.onrender.com/api/auth/login"
+        );
         setDoctors(docRes.data);
       } catch (err) {
         setError("Could not fetch initial data.");
@@ -41,7 +43,7 @@ const AppointmentsPage = () => {
       if (selectedDoctor && selectedDate) {
         try {
           const res = await axios.get(
-            `http://localhost:5000/api/doctors/${selectedDoctor}/slots?date=${selectedDate}`
+            `https://healthbooker-app.onrender.com/api/doctors/${selectedDoctor}/slots?date=${selectedDate}`
           );
           setAvailableSlots(res.data);
           setSelectedSlot(null);
@@ -66,7 +68,11 @@ const AppointmentsPage = () => {
         timeSlot: selectedSlot._id,
         reason,
       };
-      await axios.post("http://localhost:5000/api/appointments", body, config);
+      await axios.post(
+        "https://healthbooker-app.onrender.com/api/appointments",
+        body,
+        config
+      );
       window.location.reload();
     } catch (err) {
       setError("Could not book appointment.");

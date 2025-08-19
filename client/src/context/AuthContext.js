@@ -19,7 +19,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (formData) => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        "https://healthbooker-app.onrender.com/api/auth/login",
         formData
       );
       const { token, user } = response.data;
@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }) => {
   const signup = async (userData) => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/auth/signup",
+        "https://healthbooker-app.onrender.com/api/auth/signup",
         userData
       );
       const { token, user } = response.data;
